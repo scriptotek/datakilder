@@ -8,6 +8,6 @@ Både data og kode er lisensiert med
 
 Mer informasjon finnes i README-filene for hver datakilde:
 
- - [UBOs emneregister til Dewey](dewey-emneregister/README.md)
+ - [UBOs emneregister til Dewey](usvd/README.md)
  - [HUMORD](humord/README.md)
  - [Katalogdata](katalog/README.md)
