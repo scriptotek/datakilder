@@ -32,7 +32,7 @@ implementert i `convert.xq`. Vi bruker hovedsakelig
       <http://data.ub.uio.no/usvd/<term-id> a skos:Concept
         skos:prefLabel "<hovedemnefrase> : <kjede>"@nb
         dcterms:identifier "<term-id>"
-        dcterms:date "<dato>"^^xs:date
+        dcterms:modified "<dato>"^^xs:date
         skos:notation "<signatur>"^^<http://dewey.info/schema-terms/Notation>
         skos:definition "<definisjon>"@nb
         skos:editorialNote "<noter>"@nb

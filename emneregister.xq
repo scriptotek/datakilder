@@ -66,9 +66,9 @@ as element()*
 					$post/term-id/text()
 				}</dcterms:identifier>
 				<skos:inScheme rdf:resource="{ $scheme }"/>
-				<dcterms:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">{
+				<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">{
 					xs:date( $post/dato/text() )
-				}</dcterms:date>
+				}</dcterms:modified>
 				{
 					(: We could add a switch here to support more classification schemes in the future :)
 					emneregister:signaturesAsDdc( $post/signatur )[1]
