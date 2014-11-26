@@ -94,7 +94,7 @@ def extract(humord_file, cat_files):
                 if m:
                     term = '%s (%s)' % (m.groups()[0], m.groups()[1])
 
-                if re.search(u' \((form|ordbøker)\)', term, flags=re.I):
+                if re.search(u' \((Form|Ordbøker)\)', term):  # Case-sensitive
                     # Disse ligger nå i 655.
                     # Denne sjekken kan droppes når vi får oppdaterte katalogdata
                     continue
