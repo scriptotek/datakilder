@@ -1,2 +1,4 @@
 src
 katklassdump.tbz2
+*.json
+*.xlsx

@@ -1,4 +1,12 @@
 # encoding=utf8
+#
+# Dette scriptet leser `*.mrc`-filene i `./src/` og skriver ut RDF til
+# `bib.ttl`.  Se README.md for mer info om konverteringsprosessen.
+#
+# Alle HUMORD-innførsler sjekkes mot den oppdaterte RDF-representasjon av
+# autoritetsregisteret som leses fra `HUMEregister.ttl`. I tilfeller der
+# emneordet ikke blir funnet, lagres objektid til filen `vaskeliste.json`
+# for videre behandling med scriptet `vaskeliste.py`.
 
 import re
 import sys
@@ -6,6 +14,7 @@ import logging
 import logging.handlers
 from extractor import BsExtrator
 import argparse
+import json
 from rdflib.namespace import Namespace, RDF, RDFS, SKOS, DCTERMS
 from rdflib import URIRef, RDFS, Literal, Graph
 
@@ -45,6 +54,9 @@ def extract(humord_file, cat_files):
         u'@i': u'ı',
         u'#ug': u'ğ',
     }
+
+    # Documents with subject headings that could not be matched
+    documentsToCheck = []
 
     logger.info('Load: %s' % (humord_file))
 
@@ -113,6 +125,7 @@ def extract(humord_file, cat_files):
                         out.add((concept, DCTERMS.subject, val[0]))
                     except StopIteration:
                         logger.error('Dok %s - Fant ikke i Humord: %s' % (record['id'], term))
+                        documentsToCheck.append(record['id'])
 
         if len([x for x in out.predicate_objects(concept)]) != 0:
             year = 1900 + int(record['id'][:2])
@@ -121,11 +134,14 @@ def extract(humord_file, cat_files):
             out.add((concept, RDF.type, DCTERMS.BibliographicResource))
             out.add((concept, DCTERMS.date, Literal('{}'.format(year))))
 
-    return out
+    return out, documentsToCheck
 
 
 def main():
-    out = extract('../humord/HUMEregister.ttl', ['src/out%d.mrc' % year for year in range(1974, 2015)])
+    out, documentsToCheck = extract('../humord/HUMEregister.ttl', ['src/out%d.mrc' % year for year in range(1974, 2015)])
+
+    logger.info('Write: vaskeliste.json')
+    json.dump(documentsToCheck, open('vaskeliste.json', 'w'))
 
     logger.info('Write: bib.ttl')
     out.serialize('bib.ttl', format='turtle')
