@@ -13,7 +13,7 @@ class BsExtrator:
         # Lager en emneordsstreng av delfeltene i MARC-feltet
         # Hvert delfelt kan repeteres
         streng = []
-        for q in ['a', 'b', 'x', 'y', 'z']:
+        for q in ['a', 'b']:
             if q in sf:
                 for p in sf[q]:
                     streng.append(p)
