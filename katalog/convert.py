@@ -125,7 +125,7 @@ def extract(humord_file, cat_files):
 
 
 def main():
-    out = extract('../humord/HUMEregister.ttl', ['src/out%d.mrc' % year for year in range(1980, 2015)])
+    out = extract('../humord/HUMEregister.ttl', ['src/out%d.mrc' % year for year in range(1974, 2015)])
 
     logger.info('Write: bib.ttl')
     out.serialize('bib.ttl', format='turtle')
