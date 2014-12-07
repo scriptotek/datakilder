@@ -1,0 +1,14 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix cc: <http://creativecommons.org/ns#> .
+
+<http://data.ub.uio.no/usvd/> a skos:ConceptScheme ;
+    rdfs:label "UBOs emneregister"@nb ;
+    cc:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
+    dcterms:creator "University Library of Oslo"@en,
+                "Universitetsbiblioteket i Oslo"@nb ;
+    dcterms:description "The University of Oslo Library's Norwegian relative index to DDC"@en,
+        "Universitetsbiblioteket i Oslos emneregister til Dewey."@nb ;
+    dcterms:language <http://lexvo.org/id/iso639-3/nob> .
