@@ -74,16 +74,16 @@ as element()*
 					emneregister:signaturesAsDdc( $post/signatur )[1]
 				}{
 					for $x in $post/definisjon/text()
-					return <skos:definition>{ $x }</skos:definition>
+					return <skos:definition xml:lang="nb">{ $x }</skos:definition>
 				}{
 					for $x in $post/noter/text()
-					return <skos:editorialNote>{ $x }</skos:editorialNote>
+					return <skos:editorialNote xml:lang="nb">{ $x }</skos:editorialNote>
 				}{
 					for $x in $post/lukket-bemerkning/text()
-					return <skos:editorialNote>Lukket bemerkning: { $x }</skos:editorialNote>
+					return <skos:editorialNote xml:lang="nb">Lukket bemerkning: { $x }</skos:editorialNote>
 				}{
 					for $x in $post/gen-se-ogsa-henvisning/text()
-					return <skos:scopeNote>Se også: { $x }</skos:scopeNote>
+					return <skos:scopeNote xml:lang="nb">Se også: { $x }</skos:scopeNote>
 				}{
 					for $x in $post/overordnetterm-id/text()
 					return <skos:broader rdf:resource="{ emneregister:uriFromTermId( $uri_base, $x ) }"/>
