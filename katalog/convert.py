@@ -32,7 +32,7 @@ logger.addHandler(console_handler)
 
 schemes = {
     'ddc23': {'ns': Namespace('http://dewey.info/class/'), 'el': '{id}/e23/'},
-    'bib': {'ns': Namespace('http://data.ub.uio.no/bib/'), 'el': '{id}'}
+    'bib': {'ns': Namespace('http://data.ub.uio.no/bib/'), 'el': 'c{id}'}
 }
 
 

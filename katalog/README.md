@@ -27,6 +27,17 @@ dette i RDF. Posten ovenfor blir seende slik ut med Turtle-serialisering:
             <http://data.ub.uio.no/humord/11073> ,
             <http://dewey.info/class/895.68/e23/> ;
 
+
+
+        ubo:classification <http://data.ub.uio.no/bib/classification/ddc/23/895.68>
+
+    <http://data.ub.uio.no/bib/classification/ddc/23/895.68> a skos:Concept
+        skos:broader <http://data.ub.uio.no/bib/classification/ddc/895.68>
+
+    ALT B)
+        ubo:ddc "895.68"
+        ubo:ddc23 "895.68"
+
 Foreløpig henter vi bare ut HUMORD-indeksering (`698k`)
 og DDC23-klassifikasjon (`082k $2DDC-23`).
 
