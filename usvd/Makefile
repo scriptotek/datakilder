@@ -2,7 +2,7 @@
 all: USVDregister.ttl
 
 USVDregister.ttl: USVDregister.tmp.ttl
-	rm skosify.log
+	rm -f skosify.log
 	../tools/skosify-sort/skosify-sort.py -c skosify.ini vocabulary.ttl USVDregister.tmp.ttl -o USVDregister.ttl
 
 USVDregister.tmp.ttl: USVDregister.rdf.xml
@@ -16,6 +16,6 @@ USVDregister.rdf.xml: USVDregister.xml
 #    wget http://www.bibsys.no/files/out/humordsok/USVDregister.xml
 
 clean:
-	rm USVDregister.rdf.xml
-	rm USVDregister.ttl
-	rm USVDregister.tmp.ttl
+	rm -f USVDregister.rdf.xml
+	rm -f USVDregister.ttl
+	rm -f USVDregister.tmp.ttl
