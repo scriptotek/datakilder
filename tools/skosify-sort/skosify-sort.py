@@ -5,7 +5,7 @@
     Use the same way as you would use skosify
 
  Example:
-    ./skosify-sort.py -c skosify.ini vocabulary.ttl HUMEregister.tmp.ttl -o HUMEregister.ttl
+    ./skosify-sort.py -c skosify.ini vocabulary.ttl humord.tmp.ttl -o humord.ttl
 """
 from __future__ import absolute_import
 from __future__ import print_function

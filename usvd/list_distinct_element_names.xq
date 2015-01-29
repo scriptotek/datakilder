@@ -2,7 +2,7 @@
 
 <nodes>
 {
-	for $x in distinct-values(doc('USVDregister.xml')//*/name())
+	for $x in distinct-values(doc('usvd.xml')//*/name())
 	return element {$x} {''}
 }
 </nodes>

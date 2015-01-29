@@ -1,0 +1,9 @@
+[isql]
+path=/path/to/isql-vt
+host=localhost:1111
+user=
+pass=
+
+[dumps]
+dumps_dir=/projects/data.ub.uio.no/dumps
+

@@ -44,7 +44,7 @@ og DDC23-klassifikasjon (`082k $2DDC-23`).
 ### Fra Humord-term til identifikator
 
 * Humords identifikatorer ligger ikke i katalogdataene. Disse må derfor søkes
-  opp fra termene. Scriptet søker opp URIer fra data i `../humord/HUMEregister.ttl`.
+  opp fra termene. Scriptet søker opp URIer fra data i `../humord/humord.ttl`.
 
 * Spesialtegn er kodet annerledes i katalogdataene enn i emneregisteret, så vi
   må mappe mellom de. Eksempelvis er `ä` kodet som `@æ`. Mappinger for de

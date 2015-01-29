@@ -4,7 +4,7 @@
 # `bib.ttl`.  Se README.md for mer info om konverteringsprosessen.
 #
 # Alle HUMORD-innførsler sjekkes mot den oppdaterte RDF-representasjon av
-# autoritetsregisteret som leses fra `HUMEregister.ttl`. I tilfeller der
+# autoritetsregisteret som leses fra `humord.ttl`. I tilfeller der
 # emneordet ikke blir funnet, lagres objektid til filen `vaskeliste.json`
 # for videre behandling med scriptet `vaskeliste.py`.
 
@@ -138,7 +138,7 @@ def extract(humord_file, cat_files):
 
 
 def main():
-    out, documentsToCheck = extract('../humord/HUMEregister.ttl', ['src/out%d.mrc' % year for year in range(1974, 2015)])
+    out, documentsToCheck = extract('../humord/humord.ttl', ['src/out%d.mrc' % year for year in range(1974, 2015)])
 
     logger.info('Write: vaskeliste.json')
     json.dump(documentsToCheck, open('vaskeliste.json', 'w'))

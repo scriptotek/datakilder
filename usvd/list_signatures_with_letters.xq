@@ -1,7 +1,7 @@
 (: Return all posts with letters or other characters outside [0-9.-] in the <signature> field :)
 
 {
-    for $post in doc('USVDregister.xml')/usvd/post
+    for $post in doc('usvd.xml')/usvd/post
     where
     {
         for $sig in $post/signatur

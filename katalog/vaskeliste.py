@@ -3,7 +3,7 @@
 # Dette scriptet verifiserer Humord-innførslene for en liste dokumenter
 # hentet fra `vask.json`. For hvert dokument hentes oppdaterte emneinnførsler
 # fra Bibsys' SRU-tjeneste via KatApi, og disse blir sjekket mot oppdaterte
-# autoritetsdata fra `HUMEregister.ttl`. Feilinnførsler lagres til filen
+# autoritetsdata fra `humord.ttl`. Feilinnførsler lagres til filen
 # `humord-vask.xlsx`.
 
 import requests
@@ -38,7 +38,7 @@ console_handler.setLevel(logging.INFO)
 console_handler.setFormatter(formatter)
 logger.addHandler(console_handler)
 
-humord_file = '../humord/HUMEregister.ttl'
+humord_file = '../humord/humord.ttl'
 logger.info('Load: %s' % (humord_file))
 humord = Graph()
 humord.load(humord_file, format='turtle')

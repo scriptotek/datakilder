@@ -66,12 +66,36 @@ class BsExtrator:
 
             # Dewey (082)
             if field['code'] == '082' and 'assigner' in field:
-                o['classes'].append({
-                    'notation': field['subfields']['a'] if 'a' in field['subfields'] else [],
-                    'assigner': field['assigner'],
-                    'system': 'ddc',
-                    'edition': field['subfields']['2'][0] if '2' in field['subfields'] else None
-                })
+
+                # $a Hovednummer
+                if 'a' in field['subfields']:
+                    for notation in field['subfields']['a']:
+                        o['classes'].append({
+                            'notation': notation,
+                            'assigner': field['assigner'],
+                            'system': 'ddc',
+                            'edition': field['subfields']['2'][0] if '2' in field['subfields'] else None
+                        })
+
+                # $a Alternativt nummer
+                if 'b' in field['subfields']:
+                    for notation in field['subfields']['b']:
+                        o['classes'].append({
+                            'notation': notation,
+                            'assigner': field['assigner'],
+                            'system': 'ddc',
+                            'edition': field['subfields']['2'][0] if '2' in field['subfields'] else None
+                        })
+
+                # $d (R)DEWEY-nummer fra NB (Nasjonalbiblioteket)
+                if 'd' in field['subfields']:
+                    for notation in field['subfields']['d']:
+                        o['classes'].append({
+                            'notation': notation,
+                            'assigner': 'g',  # NB
+                            'system': 'ddc',
+                            'edition': field['subfields']['2'][0] if '2' in field['subfields'] else None
+                        })
 
         return o
 

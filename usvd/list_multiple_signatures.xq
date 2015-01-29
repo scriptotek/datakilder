@@ -11,7 +11,7 @@ as element()*
 
 (: Return all posts with more than one valid <signature> :)
 {
-    for $post in doc( 'USVDregister.xml' )/usvd/post
+    for $post in doc( 'usvd.xml' )/usvd/post
     let $sigs := local:signatures( $post/signatur )
     where count($sigs) > 1
     return <post>

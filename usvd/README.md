@@ -8,11 +8,11 @@ til Dewey, derav akronymet USVD som fremdeles brukes.
 
 Registeret er søkbart på <http://wgate.bibsys.no/search/pub?base=USVDEMNE>.
 Det vedlikeholdes i BIBSYS' emnemodul, og vi har fått en XML-eksport
-derfra (`USVDregister.xml`) på epost fra Gunvald 30. juni 2014.
+derfra (`usvd.xml`) på epost fra Gunvald 30. juni 2014.
 
-* `USVDregister.xml` : Registeret som eksportert fra BIBSYS' emnemodul.
-* `USVDregister.ttl` : Registeret konvertert til RDF og serialisert som Turtle.
-* `convert.xq` : XQuery-script for å konvertere `USVDregister.xml` til RDF.
+* `usvd.xml` : Registeret som eksportert fra BIBSYS' emnemodul.
+* `usvd.ttl` : Registeret konvertert til RDF og serialisert som Turtle.
+* `convert.xq` : XQuery-script for å konvertere `usvd.xml` til RDF.
 
 ### Konverteringsprosessen
 
@@ -86,12 +86,12 @@ implementert i `convert.xq`. Vi bruker hovedsakelig
 
 XQuery-scriptet kan kjøres med f.eks. [Zorba](http://www.zorba.io/):
 
-    $ zorba -i convert.xq >| USVDregister.rdf.xml
+    $ zorba -i convert.xq >| usvd.rdf.xml
 
 Konvertering fra RDF/XML til RDF/Turtle kan gjøres med f.eks.
 [Rapper](http://librdf.org/raptor/rapper.html):
 
-    $ rapper -i rdfxml -o turtle USVDregister.rdf.xml >| USVDregister.ttl
+    $ rapper -i rdfxml -o turtle usvd.rdf.xml >| usvd.ttl
 
 ### Lisens
 

@@ -12,6 +12,6 @@ declare variable $uri_base := 'http://data.ub.uio.no/usvd/';
 
 
 (: To test a specific post: :)
-(: emneregister:post(doc('USVDregister.xml')/usvd/post[descendant::term-id/text()="USVD21236"]) :)
+(: emneregister:post(doc('usvd.xml')/usvd/post[descendant::term-id/text()="USVD21236"]) :)
 
-emneregister:toRdf( doc( 'USVDregister.xml' )/usvd/post, $scheme, $uri_base, 'ddc' )
+emneregister:toRdf( doc( 'usvd.xml' )/usvd/post, $scheme, $uri_base, 'ddc' )
