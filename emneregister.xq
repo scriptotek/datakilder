@@ -44,6 +44,17 @@ as xs:string
 declare function emneregister:posts( $posts as element()*, $scheme as xs:string, $uri_base as xs:string, $signature_handler as xs:string)
 as element()*
 {
+	<skos:ConceptScheme rdf:about="{ $scheme }">
+	{
+		for $post in $posts
+		return
+		{
+			if ($post/toppterm-id/text() = $post/term-id/text()) then
+				<skos:hasTopConcept rdf:resource="{ emneregister:uriFromTermId( $uri_base, $post/term-id/text() ) }"/>
+			else ()
+		}
+	}
+	</skos:ConceptScheme>,
 	for $post in $posts
 	return
 	{
@@ -66,7 +77,6 @@ as element()*
 				<dcterms:identifier>{
 					$post/term-id/text()
 				}</dcterms:identifier>
-				<skos:inScheme rdf:resource="{ $scheme }"/>
 				<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">{
 					xs:date( $post/dato/text() )
 				}</dcterms:modified>
@@ -76,6 +86,11 @@ as element()*
 					else if ($post/type/text() = 'F') then
 					<rdf:type rdf:resource="http://data.ub.uio.no/onto/bs#FasettIndikator"/>
 					else ()
+				}{
+					if ($post/toppterm-id/text() = $post/term-id/text()) then
+						<skos:topConceptOf rdf:resource="{ $scheme }"/>
+					else
+						<skos:inScheme rdf:resource="{ $scheme }"/>
 				}{
 					(: We could add a switch here to support more classification schemes in the future :)
 					emneregister:signaturesAsDdc( $post/signatur )[1]
@@ -92,7 +107,9 @@ as element()*
 					for $x in $post/gen-se-ogsa-henvisning/text()
 					return <skos:scopeNote xml:lang="nb">Se også: { $x }</skos:scopeNote>
 				}{
-					for $x in $post/overordnetterm-id/text()
+					(: Ignore overordnetterm-id if the concept is a top concept! :)
+					if ($post/toppterm-id/text() = $post/term-id/text()) then ()
+					else for $x in $post/overordnetterm-id/text()
 					return <skos:broader rdf:resource="{ emneregister:uriFromTermId( $uri_base, $x ) }"/>
 				}{
 					for $x in $post/ox-id/text()
