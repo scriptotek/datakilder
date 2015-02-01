@@ -35,8 +35,8 @@ as xs:string
 declare function emneregister:uriFromTermId( $uri_base as xs:string, $termId as xs:string )
 as xs:string
 {
-	(: Strip off letter prefix :)
-	concat( $uri_base, replace( $termId, '[^0-9]', '' ))
+	(: Strip off letter prefix <s>and leading zeros</s> :)
+	concat( $uri_base, replace( $termId, '^[^0-9]+', '' ))
 };
 
 (: Parse <post> elements, return skos:Concepts :)
