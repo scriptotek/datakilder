@@ -5,6 +5,7 @@ declare namespace rdf     = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
 declare namespace rdfs    = "http://www.w3.org/2000/01/rdf-schema#";
 declare namespace skos    = "http://www.w3.org/2004/02/skos/core#";
 declare namespace dcterms = "http://purl.org/dc/terms/";
+declare namespace bs      = "http://data.ub.uio.no/onto/bs#";
 
 
 (: Strip off non-valid characters, return only non-empty values :)
@@ -70,6 +71,12 @@ as element()*
 					xs:date( $post/dato/text() )
 				}</dcterms:modified>
 				{
+					if ($post/type/text() = 'K') then
+					<rdf:type rdf:resource="http://data.ub.uio.no/onto/bs#KnuteTerm"/>
+					else if ($post/type/text() = 'F') then
+					<rdf:type rdf:resource="http://data.ub.uio.no/onto/bs#FasettIndikator"/>
+					else ()
+				}{
 					(: We could add a switch here to support more classification schemes in the future :)
 					emneregister:signaturesAsDdc( $post/signatur )[1]
 				}{
