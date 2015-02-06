@@ -7,7 +7,7 @@ den 28. april 2014, med emneord og klassifikasjon for alle bibliografiske poster
 BIBSYS-katalogen. Kildefilene er i BIBSYSMARC i en serialisering som trolig ikke
 har noe navn, men med det ligger veldig nært det
 [YAZ](http://www.indexdata.com/yaz/doc/yaz-marcdump.html)
-kaller ‘line-format’. En eksempelpost ser slik ut:
+kaller ‘line-format’. En enkel eksempelpost kan se slik ut:
 
     *000 132089262
     *082k $2DDC-23
@@ -17,6 +17,76 @@ kaller ‘line-format’. En eksempelpost ser slik ut:
     $bPeriode
     *698k $aJapansk litteratur
     ^
+
+mens en mer omfattende post kan se slik ut:
+
+    *000 13208953x
+    *082ud$2DDC-23
+    $a302.23068
+    *082up$a302.23068
+    *082uv$2DDC-23
+    $a302.23068
+    $b338.456130223
+    $b338.4730223
+    $x(1)0685
+    *082k $2DDC-23
+    $a302.23068
+    *082un$2DDC-23
+    $a302.23068
+    *082uk$2DDC-23
+    $a302.23068
+    *082ug$2DDC-23
+    $a302.23
+    *082uh$a302.23068
+    *082ur$2DDC-23
+    $a302.23068
+    *082d $2DDC-23
+    $a302.23068
+    *082c $2DDK-5
+    $a302.23
+    $b302.23068
+    *687ud$aMassemedia : Administrasjon
+    *687ud$aMassemedia : Ledelse
+    *691**$amedieverksemder verksemdsendringar mediavirksomheter endringer media
+    *698c $aKonvergens
+    $bTeknologi
+    *698c $aMedier
+    *698c $aInnovasjon
+    *698c $aEndring
+    *698c $aMediekonvergens
+    *698c $aSosial endring
+    ^
+
+For enklere prosessering kan vi trekke ut dataene vi er interessert i (f.eks. 698 og 082)
+og omgjøre til tabellformat (årstall er igjen tatt fra de to første sifrene i objektid):
+
+| År      | Objektid    | Skjema    | Term/notasjon          | Bibliotek |
+|---------|-------------|-----------|------------------------|-----------|
+| 2013    | 13208953x   | ddc       | 302.23068              | up        |
+| 2013    | 13208953x   | ddc       | 302.23068              | uv        |
+| 2013    | 13208953x   | ddc       | 338.456130223          | uv        |
+| 2013    | 13208953x   | ddc       | 338.4730223            | uv        |
+| 2013    | 13208953x   | ddc       | 302.23068              | k         |
+| 2013    | 13208953x   | ddc       | 302.23068              | un        |
+| 2013    | 13208953x   | ddc       | 302.23068              | uk        |
+| 2013    | 13208953x   | ddc       | 302.23                 | ug        |
+| 2013    | 13208953x   | ddc       | 302.23068              | uh        |
+| 2013    | 13208953x   | ddc       | 302.23068              | ur        |
+| 2013    | 13208953x   | ddc       | 302.23068              | d         |
+| 2013    | 13208953x   | ddc       | 302.23                 | c         |
+| 2013    | 13208953x   | ddc       | 302.23068              | c         |
+| 2013    | 13208953x   | humord    | Konvergens (Teknologi) | c         |
+| 2013    | 13208953x   | humord    | Medier                 | c         |
+| 2013    | 13208953x   | humord    | Innovasjon             | c         |
+| 2013    | 13208953x   | humord    | Endring                | c         |
+| 2013    | 13208953x   | humord    | Mediekonvergens        | c         |
+| 2013    | 13208953x   | humord    | Sosial endring         | c         |
+
+* Her har jeg valgt å ikke ta med utgave fordi det er [så få innførsler](http://biblionaut.net/bibsys-emnedata/#ddc)
+der dette er angitt at det fungerer dårlig som filtreringskriterium.
+* Merk at praksis for emneord er at det samme emneordet ikke gjentas av ulike bibliotek, mens det for klassifikasjon er at hvert bibliotek klassifiserer, uavhengig av om klassenummeret finnes på posten fra før.
+
+### Konvertering
 
 Ved hjelp av Python-scriptet `convert.py` og [rdflib](https://github.com/RDFLib/rdflib)
 trekker vi ut data fra Universitetsbiblioteket i Oslo (UBO, bibkode 'k'), og uttrykker
