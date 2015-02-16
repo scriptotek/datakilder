@@ -1,4 +1,13 @@
-#!/bin/sh
+#!/bin/bash
+#
+# This script puts data to Fuseki
+#
+# Set RUBYENV to the value returned from `rvm env --path` to make the script find
+# the RVM environment when run as a cronjob.
+#
+# Example:
+#  30 7 * * 1 RUBYENV=/usr/local/rvm/environments/ruby-1.9.3-p551@global cd /opt/datakilder && git pull uio master && ./tools/update-fuseki.sh humord | tee -a update-fuseki.log
+
 
 VOC=$1
 if [ -z "$VOC" ]; then
@@ -12,6 +21,11 @@ if [ ! -d "$VOC" ]; then
 fi
 
 echo "$(date +'%Y-%M-%d %H:%m:%S %Z') - Job 'update-fuseki' starting"
+
+if [ -n "$RUBYENV" ]; then
+  source "$RUBYENV"
+fi
+
 echo "Vocabulary: $VOC"
 echo "Inferring and adding skos:narrower"
 python /opt/skosify-1.0/skosify.py --no-enrich-mappings --narrower --no-mark-top-concepts --infer /opt/datakilder/$VOC/$VOC.ttl -o /opt/datakilder/$VOC/$VOC-skosify.ttl
