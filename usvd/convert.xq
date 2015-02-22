@@ -8,7 +8,7 @@ declare namespace skos    = "http://www.w3.org/2004/02/skos/core#";
 declare namespace dcterms = "http://purl.org/dc/terms/";
 
 declare variable $scheme := 'http://data.ub.uio.no/usvd/';
-declare variable $uri_base := 'http://data.ub.uio.no/usvd/';
+declare variable $uri_base := 'http://data.ub.uio.no/usvd/c';
 
 
 (: To test a specific post: :)
