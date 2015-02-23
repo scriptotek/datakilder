@@ -4,7 +4,7 @@ declare namespace marcxml = "http://www.loc.gov/MARC21/slim";
 declare namespace rdf     = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
 declare namespace rdfs    = "http://www.w3.org/2000/01/rdf-schema#";
 declare namespace skos    = "http://www.w3.org/2004/02/skos/core#";
-declare namespace dcterms = "http://purl.org/dc/terms/";
+declare namespace dct     = "http://purl.org/dc/terms/";
 declare namespace bs      = "http://data.ub.uio.no/onto/bs#";
 
 
@@ -74,12 +74,12 @@ as element()*
 				<skos:prefLabel xml:lang="nb">{
 					emneregister:label($post)
 				}</skos:prefLabel>
-				<dcterms:identifier>{
+				<dct:identifier>{
 					$post/term-id/text()
-				}</dcterms:identifier>
-				<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">{
+				}</dct:identifier>
+				<dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">{
 					xs:date( $post/dato/text() )
-				}</dcterms:modified>
+				}</dct:modified>
 				{
 					if ($post/type/text() = 'K') then
 					<rdf:type rdf:resource="http://data.ub.uio.no/onto/bs#KnuteTerm"/>
@@ -128,7 +128,7 @@ as element()*
 {
 	<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 		xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-		xmlns:dcterms="http://purl.org/dc/terms/">
+		xmlns:dct="http://purl.org/dc/terms/">
 	{ 
 		emneregister:posts($posts, $scheme, $uri_base, $signature_handler)
 	}

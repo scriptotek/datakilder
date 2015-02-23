@@ -1,15 +1,52 @@
+@base <http://data.ub.uio.no/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix cc: <http://creativecommons.org/ns#> .
 @prefix lexvo: <http://lexvo.org/id/iso639-3/> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
 
-<http://data.ub.uio.no/usvd/> a skos:ConceptScheme ;
+<http://data.ub.uio.no/usvd> a skos:ConceptScheme ;
     rdfs:label "UBOs emneregister"@nb ;
-    cc:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
-    dcterms:creator "University Library of Oslo"@en,
-                "Universitetsbiblioteket i Oslo"@nb ;
     dcterms:description "The University of Oslo Library's Norwegian relative index to DDC"@en,
         "Universitetsbiblioteket i Oslos emneregister til Dewey."@nb ;
-    dcterms:language lexvo:nob .
+    dcterms:creator <corp/UBO> ;
+    dcterms:language lexvo:nob ;
+    cc:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
+    dcterms:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
+    dcterms:modified "2015-02-23"^^xsd:date ;
+    void:sparqlEndpoint <sparql> ;
+    void:dataDump <dumps/usvd.rdf>,
+        <dumps/usvd.ttl> ;
+    void:uriSpace "http://data.ub.uio.no/usvd/" ;
+    void:exampleResource <usvd/c07134> ;
+    void:vocabulary skos: .
+
+<corp/UBO> a foaf:Organization ;
+    rdfs:label "University of Oslo Library"@en,
+        "Universitetsbiblioteket i Oslo"@nb ;
+    owl:sameAs <http://dbpedia.org/resource/University_Library_of_Oslo>,
+        <http://viaf.org/viaf/155670338/>,
+        <http://www.wikidata.org/entity/Q3354774> .
+
+<sparql> a sd:Service ;
+    sd:url <sparql> ;
+    sd:supportedLanguage sd:SPARQL11Query ;
+    sd:feature sd:UnionDefaultGraph ;
+    sd:defaultDataset <sparql/dataset> .
+
+<sparql/dataset> a sd:Dataset ;
+    dcterms:title "data.ub.uio.no" ;
+    dcterms:description "Open datasets at the University of Oslo Library"@en ;
+    sd:defaultGraph <sparql/graphs/default> ;
+    sd:namedGraph <sparql/graphs/usvd> .
+
+<sparql/graphs/default> a sd:Graph .
+
+<sparql/graphs/usvd> a sd:NamedGraph ;
+    sd:name <usvd> ;
+    sd:graph <usvd> .
