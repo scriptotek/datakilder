@@ -3,7 +3,7 @@ all: usvd.ttl
 
 usvd.ttl: usvd.tmp.ttl
 	rm -f skosify.log
-	../tools/skosify-sort/skosify-sort.py -o usvd.ttl vocabulary.ttl usvd.tmp.ttl
+	../tools/skosify-sort/skosify-sort.py -b 'http://data.ub.uio.no/' -o usvd.ttl vocabulary.ttl usvd.tmp.ttl
 
 usvd.tmp.ttl: usvd.rdf.xml
 	rapper -i rdfxml -o turtle usvd.rdf.xml >| usvd.tmp.ttl
