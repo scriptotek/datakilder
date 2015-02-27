@@ -10,12 +10,13 @@
 from __future__ import absolute_import
 from __future__ import print_function
 
+import os
 import re
 import sys
 import argparse
+from rdflib import Graph, BNode
 from rdflib.plugins.serializers.turtle import TurtleSerializer
 from rdflib.namespace import RDF, RDFS, SKOS, FOAF, Namespace
-from rdflib.graph import Graph
 
 try:
     from skosify import Skosify
@@ -32,6 +33,7 @@ class OrderedTurtleSerializer(TurtleSerializer):
         super(OrderedTurtleSerializer, self).__init__(store)
 
         SD = Namespace('http://www.w3.org/ns/sparql-service-description#')
+        ISOTHES = Namespace('http://purl.org/iso25964/skos-thes#')
 
         # Order of classes:
         self.topClasses = [SKOS.ConceptScheme,
@@ -40,6 +42,7 @@ class OrderedTurtleSerializer(TurtleSerializer):
                            SD.Dataset,
                            SD.Graph,
                            SD.NamedGraph,
+                           ISOTHES.ThesaurusArray,
                            SKOS.Concept]
 
         # Order of instances:
@@ -175,8 +178,10 @@ if __name__ == '__main__':
 
     g = Graph()
     args = parser.parse_args()
+    formats = {'.ttl': 'turtle', '.nt': 'nt'}
     for fname in args.infiles:
-        g.load(fname, format='turtle')
+        ff = formats[os.path.splitext(fname)[-1]]
+        g.load(fname, format=ff)
 
     skosify_process(g)
 

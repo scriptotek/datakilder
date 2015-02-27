@@ -84,7 +84,10 @@ as element()*
 					if ($post/type/text() = 'K') then
 					<rdf:type rdf:resource="http://data.ub.uio.no/onto/bs#KnuteTerm"/>
 					else if ($post/type/text() = 'F') then
-					<rdf:type rdf:resource="http://data.ub.uio.no/onto/bs#FasettIndikator"/>
+					(
+					<rdf:type rdf:resource="http://purl.org/iso25964/skos-thes#ThesaurusArray"/>,
+					<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Collection"/>
+					)
 					else ()
 				}{
 					if ($post/toppterm-id/text() = $post/term-id/text()) then
