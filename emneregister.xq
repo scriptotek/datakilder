@@ -18,6 +18,13 @@ as element()*
 	return <skos:notation rdf:datatype="http://dewey.info/schema-terms/Notation">{ $s }</skos:notation>
 };
 
+(: Return only non-empty values :)
+declare function emneregister:signaturesAsUdc( $sigs as element()* )
+as element()*
+{
+	for $sig in $sigs
+	return <skos:notation rdf:datatype="http://udcdata.info/UDCnotation">{ $sig/text() }</skos:notation>
+};
 
 (: Return the label for a post, including chain and qualifiers :)
 declare function emneregister:label( $post as element() )
@@ -25,7 +32,7 @@ as xs:string
 {
 	(: Strip off non-valid characters, return only non-empty elements :)
 	concat(
-		string-join(( $post/hovedemnefrase/text(), $post/kjede/text() ), ' : ' ),
+		string-join(( $post/hovedemnefrase/text(), $post/underemnefrase/text(), $post/kjede/text() ), ' : ' ),
 		{ 
 			for $x in $post/kvalifikator
 			return concat(' (', $x/text(), ')')
@@ -96,7 +103,10 @@ as element()*
 						<skos:inScheme rdf:resource="{ $scheme }"/>
 				}{
 					(: We could add a switch here to support more classification schemes in the future :)
-					emneregister:signaturesAsDdc( $post/signatur )[1]
+					switch ($signature_handler)
+						case "ddc" return emneregister:signaturesAsDdc( $post/signatur )[1]
+						case "udc" return emneregister:signaturesAsUdc( $post/signatur )[1]
+						default return ()
 				}{
 					for $x in $post/definisjon/text()
 					return <skos:definition xml:lang="nb">{ $x }</skos:definition>

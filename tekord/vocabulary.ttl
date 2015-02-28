@@ -1,0 +1,52 @@
+@base <http://data.ub.uio.no/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix lexvo: <http://lexvo.org/id/iso639-3/> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix udc: <http://udcdata.info/> .
+
+<http://data.ub.uio.no/tekord> a skos:ConceptScheme ;
+    rdfs:label "Tekord"@nb ;
+    dcterms:description """Tekord is a controlled vocabulary maintained by the library of Norwegian University of Science and Technology (NTNU) for indexing of bibliographic records. The primary domain is engineering and science, but a considerate amount of general subjects has been included as well. All terms are in Norwegian Bokmål only. Every concept has a UDC notation attached."""@en,
+        """Tekord er et kontrollert vokabular som vedlikeholdes av Teknologibiblioteket (og Realfagbiblioteket?) ved NTNU for indeksering av bibliografiske poster. Vokabularet har dermed best dekning på teknikk og vitenskap, men inneholder også generelle emner."""@nb ;
+    dcterms:creator <corp/NTNU> ;
+    dcterms:language lexvo:nob ;
+    cc:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
+    dcterms:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
+    dcterms:modified "2015-02-23"^^xsd:date ;
+    void:sparqlEndpoint <sparql> ;
+    void:dataDump <dumps/tekord.rdf>,
+        <dumps/tekord.ttl> ;
+    void:uriSpace "http://data.ub.uio.no/tekord/" ;
+    void:exampleResource <tekord/c06704> ;
+    void:vocabulary skos: .
+
+<corp/NTNU> a foaf:Organization ;
+    rdfs:label "NTNU University Library"@en,
+        "NTNU Universitetsbiblioteket"@nb ;
+    owl:sameAs <http://viaf.org/viaf/154873455>,
+        <https://www.wikidata.org/wiki/Q11990765> .
+
+<sparql> a sd:Service ;
+    sd:url <sparql> ;
+    sd:supportedLanguage sd:SPARQL11Query ;
+    sd:feature sd:UnionDefaultGraph ;
+    sd:defaultDataset <sparql/dataset> .
+
+<sparql/dataset> a sd:Dataset ;
+    dcterms:title "data.ub.uio.no" ;
+    dcterms:description "Open datasets at the University of Oslo Library"@en ;
+    sd:defaultGraph <sparql/graphs/default> ;
+    sd:namedGraph <sparql/graphs/tekord> .
+
+<sparql/graphs/default> a sd:Graph .
+
+<sparql/graphs/tekord> a sd:NamedGraph ;
+    sd:name <tekord> ;
+    sd:graph <tekord> .
