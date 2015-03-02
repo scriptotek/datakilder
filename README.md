@@ -24,15 +24,6 @@ installeres med
 
 Crontab:
 
-Bibsys legger ut oppdatert Humord-XML hver mandag klokka 07 UTC.
-0715 henter vi filen, konverterer til RDF, gjør en commit og dytter til utv.uio.no.
-
-    15 7 * * 1 cd /projects/datakilder && ./tools/publish.sh humord 2>&1 | tee out.log
-
-0730 oppdaterer vi Fuseki på en annen maskin:
-
-    30 7 * * 1 cd /opt/datakilder && git pull uio master && ./tools/update-fuseki.sh humord
-
 Repoet speiles til GitHub hver time:
 
     30 * * * * cd /projects/github-mirrors/datakilder.git/ > /dev/null; git fetch --quiet && git push --quiet --mirror github
