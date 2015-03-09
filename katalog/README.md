@@ -86,6 +86,11 @@ og omgjøre til tabellformat (årstall er igjen tatt fra de to første sifrene i
 der dette er angitt at det fungerer dårlig som filtreringskriterium.
 * Merk at praksis for emneord er at det samme emneordet ikke gjentas av ulike bibliotek, mens det for klassifikasjon er at hvert bibliotek klassifiserer, uavhengig av om klassenummeret finnes på posten fra før.
 
+### Normalisering
+
+Scriptet fjerner evt. suffiks på Dewey-numre. Eks. normaliseres "225.9505[U]" til "225.9505".
+Verdier som ikke begynner med tall utelates helt (eks.: "Samf", "S839.82", "L 1173.5")
+
 ### Konvertering
 
 Ved hjelp av Python-scriptet `convert.py` og [rdflib](https://github.com/RDFLib/rdflib)
